@@ -23,7 +23,7 @@ class Sortify:
 
     # fetches the data from db and sorts the values of a dict in a list
     def sorted_list(self):
-        result = self.cur.execute('SELECT * FROM dict')
+        result = self.cur.execute('SELECT * FROM dict ORDER BY name ASC')
         listt = list()
         for k, v in result:
             print(k,v)
@@ -31,15 +31,7 @@ class Sortify:
             dictt['id'] = k
             dictt['name'] = 'a'+ str(v)
             listt.append(dictt)
-        return rev(listt)
-
-# Reversing list of dict
-def rev(data):
-    new_list = list()
-    for i in range(len(data)-1, -1, -1):
-        new_list.append(data[i])
-    return new_list
-
+        return listt
 
 # Route to return sorted json
 @app.route('/sort_dict', methods=['POST'])
